@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const auth = require('../middleware/auth');
 const User = require('../models/User');
 
 // Register
@@ -46,6 +47,17 @@ router.post('/register', async (req, res) => {
                 res.json({ token, user: { id: user.id, name: user.name, email: user.email, role: user.role } });
             }
         );
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
+// Get User Data
+router.get('/user', auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+        res.json(user);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
