@@ -54,7 +54,7 @@ const Cart = () => {
                             <div key={item._id} className="flex justify-between items-center">
                                 <div className="flex-1">
                                     <h4 className="font-bold text-gray-800">{item.name}</h4>
-                                    <p className="text-gray-500 text-sm">${item.price.toFixed(2)}</p>
+                                    <p className="text-gray-500 text-sm">₹{item.price.toFixed(2)}</p>
                                 </div>
                                 <div className="flex items-center gap-6">
                                     <div className="flex items-center bg-gray-50 rounded-lg border border-gray-200">
@@ -73,7 +73,7 @@ const Cart = () => {
                                         </button>
                                     </div>
                                     <div className="text-right min-w-[80px]">
-                                        <p className="font-bold text-gray-900">${(item.price * item.quantity).toFixed(2)}</p>
+                                        <p className="font-bold text-gray-900">₹{(item.price * item.quantity).toFixed(2)}</p>
                                         <button
                                             onClick={() => removeFromCart(item._id)}
                                             className="text-red-500 text-xs hover:text-red-700 font-medium mt-1"
@@ -103,19 +103,19 @@ const Cart = () => {
                     <div className="space-y-3 mb-6">
                         <div className="flex justify-between text-gray-600">
                             <span>Subtotal</span>
-                            <span>${cartTotal.toFixed(2)}</span>
+                            <span>₹{cartTotal.toFixed(2)}</span>
                         </div>
                         <div className="flex justify-between text-gray-600">
                             <span>Delivery Fee</span>
-                            <span>$5.00</span>
+                            <span>₹5.00</span>
                         </div>
                         <div className="flex justify-between text-gray-600">
                             <span>Tax (5%)</span>
-                            <span>${(cartTotal * 0.05).toFixed(2)}</span>
+                            <span>₹{(cartTotal * 0.05).toFixed(2)}</span>
                         </div>
                         <div className="border-t border-gray-100 pt-3 flex justify-between text-xl font-bold text-gray-900">
                             <span>Total</span>
-                            <span>${(cartTotal + 5 + (cartTotal * 0.05)).toFixed(2)}</span>
+                            <span>₹{(cartTotal + 5 + (cartTotal * 0.05)).toFixed(2)}</span>
                         </div>
                     </div>
 

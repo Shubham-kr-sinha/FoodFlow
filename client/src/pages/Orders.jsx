@@ -3,6 +3,8 @@ import axios from 'axios';
 import io from 'socket.io-client';
 import AuthContext from '../context/AuthContext';
 
+import config from '../config';
+
 const Orders = () => {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -11,7 +13,7 @@ const Orders = () => {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/api/orders');
+                const res = await axios.get(`${config.API_URL}/api/orders`);
                 setOrders(res.data);
                 setLoading(false);
             } catch (err) {
@@ -29,7 +31,7 @@ const Orders = () => {
 
     useEffect(() => {
         if (user) {
-            const socket = io('http://localhost:5000');
+            const socket = io(config.API_URL);
 
             socket.on('connect', () => {
                 console.log('Socket connected');
@@ -90,7 +92,7 @@ const Orders = () => {
                                     </p>
                                 </div>
                                 <div className="text-right">
-                                    <p className="text-2xl font-bold text-gray-900">${order.totalAmount.toFixed(2)}</p>
+                                    <p className="text-2xl font-bold text-gray-900">₹{order.totalAmount.toFixed(2)}</p>
                                     <p className="text-xs text-gray-400">Total Amount</p>
                                 </div>
                             </div>
@@ -106,7 +108,7 @@ const Orders = () => {
                                                 </span>
                                                 <span className="font-medium text-gray-800">{item.name}</span>
                                             </div>
-                                            <span className="text-gray-600 font-medium">${(item.price * item.quantity).toFixed(2)}</span>
+                                            <span className="text-gray-600 font-medium">₹{(item.price * item.quantity).toFixed(2)}</span>
                                         </div>
                                     ))}
                                 </div>

@@ -4,11 +4,27 @@ import CartContext from '../context/CartContext';
 import AuthContext from '../context/AuthContext';
 import axios from 'axios';
 
+import config from '../config';
+
 const Checkout = () => {
     const { cart, restaurant, cartTotal, clearCart } = useContext(CartContext);
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+
+    const loadScript = (src) => {
+        return new Promise((resolve) => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.onload = () => {
+                resolve(true);
+            };
+            script.onerror = () => {
+                resolve(false);
+            };
+            document.body.appendChild(script);
+        });
+    };
 
     useEffect(() => {
         if (cart.length === 0) {
@@ -25,6 +41,13 @@ const Checkout = () => {
 
         setLoading(true);
         try {
+            const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
+
+            if (!res) {
+                alert('Razorpay SDK failed to load. Are you online?');
+                return;
+            }
+
             const orderData = {
                 restaurant: restaurant._id,
                 items: cart.map(item => ({
@@ -35,19 +58,65 @@ const Checkout = () => {
                 })),
                 totalAmount: cartTotal,
                 deliveryAddress: user.address || 'Default Address',
-                paymentMethod: 'cod'
+                paymentMethod: 'razorpay' // Default to razorpay now
             };
 
-            await axios.post('http://localhost:5000/api/orders', orderData, {
+            const result = await axios.post(`${config.API_URL}/api/orders`, orderData, {
                 headers: { 'x-auth-token': localStorage.getItem('token') }
             });
 
-            clearCart();
-            // Redirect to success page
-            navigate('/payment-success');
+            const { order, razorypayOrder, key_id } = result.data; // Note: Ensure backend returns razorpayOrder and key_id
+
+            // Backend fix had razorpayOrder, let's match it.
+            // result.data = { order, razorpayOrder, key_id, type }
+            // Let's verify variable names.
+
+            const options = {
+                key: key_id,
+                amount: result.data.razorpayOrder.amount,
+                currency: result.data.razorpayOrder.currency,
+                name: "FoodFlow",
+                description: "Order Payment",
+                order_id: result.data.razorpayOrder.id,
+                handler: async function (response) {
+                    try {
+                        const verifyData = {
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_signature: response.razorpay_signature
+                        };
+
+                        const verifyRes = await axios.post(`${config.API_URL}/api/orders/verify`, verifyData, {
+                            headers: { 'x-auth-token': localStorage.getItem('token') }
+                        });
+
+                        if (verifyRes.data.success) {
+                            clearCart();
+                            navigate('/payment-success');
+                        } else {
+                            alert('Payment verification failed');
+                        }
+                    } catch (err) {
+                        console.error(err);
+                        alert('Payment verification failed');
+                    }
+                },
+                prefill: {
+                    name: user.name,
+                    email: user.email,
+                },
+                theme: {
+                    color: "#3399cc"
+                }
+            };
+
+            const paymentObject = new window.Razorpay(options);
+            paymentObject.open();
+
         } catch (err) {
             console.error(err);
-            alert('Failed to place order');
+            const msg = err.response?.data || err.message || 'Failed to initiate payment';
+            alert(`Error: ${msg}`);
         } finally {
             setLoading(false);
         }
@@ -70,14 +139,14 @@ const Checkout = () => {
                                     <span className="font-bold">{item.quantity}x</span> {item.name}
                                 </div>
                                 <div className="font-bold text-gray-700">
-                                    ${(item.price * item.quantity).toFixed(2)}
+                                    ₹{(item.price * item.quantity).toFixed(2)}
                                 </div>
                             </div>
                         ))}
                     </div>
                     <div className="border-t pt-4 flex justify-between items-center font-bold text-lg">
                         <span>Total</span>
-                        <span>${cartTotal.toFixed(2)}</span>
+                        <span>₹{cartTotal.toFixed(2)}</span>
                     </div>
                 </div>
 
@@ -85,7 +154,7 @@ const Checkout = () => {
                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
                     <h2 className="text-xl font-bold mb-4">Payment & Delivery</h2>
                     <p className="text-gray-600 mb-6">
-                        Payment Method: <span className="font-bold text-gray-800">Cash on Delivery</span>
+                        Payment Method: <span className="font-bold text-gray-800">Razorpay (Cards, UPI, Netbanking)</span>
                     </p>
                     <button
                         onClick={handlePlaceOrder}
@@ -95,7 +164,7 @@ const Checkout = () => {
                         {loading ? 'Processing...' : 'Place Order'}
                     </button>
                     <p className="text-xs text-gray-400 mt-4 text-center">
-                        Secure checkout. Pay when you receive your food.
+                        Secure checkout via Razorpay. Pay with any method.
                     </p>
                 </div>
             </div>

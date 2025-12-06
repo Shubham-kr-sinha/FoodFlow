@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import RestaurantCard from '../components/RestaurantCard';
 
+import config from '../config';
+
 const Home = () => {
     const [restaurants, setRestaurants] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -10,7 +12,7 @@ const Home = () => {
     useEffect(() => {
         const fetchRestaurants = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/api/restaurants');
+                const res = await axios.get(`${config.API_URL}/api/restaurants`);
                 setRestaurants(res.data);
                 setLoading(false);
             } catch (err) {

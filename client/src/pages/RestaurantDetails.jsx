@@ -3,6 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import CartContext from '../context/CartContext';
 
+import config from '../config';
+
 import ReviewForm from '../components/ReviewForm';
 
 const RestaurantDetails = () => {
@@ -16,8 +18,8 @@ const RestaurantDetails = () => {
         const fetchRestaurantAndReviews = async () => {
             try {
                 const [resRestaurant, resReviews] = await Promise.all([
-                    axios.get(`http://localhost:5000/api/restaurants/${id}`),
-                    axios.get(`http://localhost:5000/api/reviews/${id}`)
+                    axios.get(`${config.API_URL}/api/restaurants/${id}`),
+                    axios.get(`${config.API_URL}/api/reviews/${id}`)
                 ]);
                 setRestaurant(resRestaurant.data);
                 setReviews(resReviews.data);
@@ -81,7 +83,7 @@ const RestaurantDetails = () => {
                         <div className="flex-1">
                             <h3 className="text-xl font-bold text-gray-800 mb-1 group-hover:text-primary transition-colors">{item.name}</h3>
                             <p className="text-gray-500 text-sm mb-3 line-clamp-2">{item.description}</p>
-                            <p className="font-bold text-lg text-gray-900">${item.price.toFixed(2)}</p>
+                            <p className="font-bold text-lg text-gray-900">₹{item.price.toFixed(2)}</p>
                         </div>
                         <div className="flex flex-col justify-between items-end">
                             {item.image && (
