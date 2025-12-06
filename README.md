@@ -2,9 +2,7 @@
 
 FoodFlow is a modern, full-stack food ordering platform built with the MERN stack (MongoDB, Express, React, Node.js). It features a seamless user experience for browsing restaurants, managing a shopping cart, and placing orders (Cash on Delivery).
 
-![Home Page]
-<img width="965" height="866" alt="image" src="https://github.com/user-attachments/assets/c785d0d9-1308-4e3e-8e3e-a03fa838ab8a" />
-
+![Home Page](file:///C:/Users/shubh/.gemini/antigravity/brain/f2c03fa0-7f24-4901-a7a0-99f8a2c4db99/result_1764957035909.png)
 
 ## 🚀 Technical Architecture
 
@@ -30,13 +28,10 @@ FoodFlow is a modern, full-stack food ordering platform built with the MERN stac
 ## 📸 Screenshots
 
 ### Menu & Cart
-![Menu Page]
-<img width="1912" height="861" alt="image" src="https://github.com/user-attachments/assets/12cc05cf-71b7-4ebc-8812-ba60d5afda37" />
+![Menu Page](file:///C:/Users/shubh/.gemini/antigravity/brain/f2c03fa0-7f24-4901-a7a0-99f8a2c4db99/menu_with_images_1764954829515.png)
 
 ### Guest Checkout Flow
-![Signup Success]
-<img width="1919" height="865" alt="image" src="https://github.com/user-attachments/assets/c403524a-7d1f-41f6-ba53-e530a43fa633" />
-
+![Signup Success](file:///C:/Users/shubh/.gemini/antigravity/brain/f2c03fa0-7f24-4901-a7a0-99f8a2c4db99/signup_success_1764961823850.png)
 
 ## 🛠️ Installation & Setup
 
