@@ -109,4 +109,30 @@ const RestaurantDetails = () => {
             <div className="mt-16 mb-10">
                 <h2 className="text-3xl font-bold mb-8 text-gray-800">Reviews & Ratings</h2>
 
-                export default RestaurantDetails;
+                {/* Review Form */}
+                <ReviewForm restaurantId={id} onReviewAdded={(newReview) => setReviews([newReview, ...reviews])} />
+
+                {/* Reviews List */}
+                <div className="space-y-6 mt-8">
+                    {reviews.map((review) => (
+                        <div key={review._id} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                            <div className="flex justify-between items-start mb-2">
+                                <div>
+                                    <h4 className="font-bold text-gray-900">{review.user?.name || 'Deleted User'}</h4>
+                                    <p className="text-gray-400 text-xs">{new Date(review.createdAt).toLocaleDateString()}</p>
+                                </div>
+                                <span className="bg-green-100 text-green-700 font-bold px-2 py-1 rounded-lg text-sm">
+                                    {review.rating} ★
+                                </span>
+                            </div>
+                            <p className="text-gray-600 mt-2">{review.comment}</p>
+                        </div>
+                    ))}
+                    {reviews.length === 0 && <p className="text-gray-500 italic">No reviews yet. Be the first to review!</p>}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default RestaurantDetails;
