@@ -155,7 +155,7 @@ const seedData = async () => {
                 description: "Spicy tandoori delights",
                 address: { street: "Sector 17 Market", city: "Chandigarh", zip: "160017" },
                 cuisine: ["Indian", "Tandoori"],
-                image: "https://images.unsplash.com/photo-1517244683847-745431d57ede?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+                image: "https://images.unsplash.com/photo-1585937421612-70a008356f36?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 rating: 4.4,
                 owner: owner._id,
                 menu: [
