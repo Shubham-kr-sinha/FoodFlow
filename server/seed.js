@@ -140,7 +140,7 @@ const seedData = async () => {
                 description: "A culinary journey through India",
                 address: { street: "Park Street", city: "Kolkata", zip: "700016" },
                 cuisine: ["Indian", "Curry"],
-                image: "https://images.unsplash.com/photo-1585937421612-70a008356f36?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+                image: "https://images.unsplash.com/photo-1517244683847-7456b63c5969?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 rating: 4.9,
                 owner: owner._id,
                 menu: [
