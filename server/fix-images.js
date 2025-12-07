@@ -13,14 +13,14 @@ const fixImages = async () => {
         // Update Spice Route
         await Restaurant.updateOne(
             { name: 'Spice Route' },
-            { $set: { image: 'https://images.unsplash.com/photo-1517244683847-7456b63c5969?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' } }
+            { $set: { image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' } }
         );
         console.log('✓ Updated Spice Route image');
 
         // Update Tandoori Nights
         await Restaurant.updateOne(
             { name: 'Tandoori Nights' },
-            { $set: { image: 'https://images.unsplash.com/photo-1585937421612-70a008356f36?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' } }
+            { $set: { image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' } }
         );
         console.log('✓ Updated Tandoori Nights image');
 

@@ -140,7 +140,7 @@ const seedData = async () => {
                 description: "A culinary journey through India",
                 address: { street: "Park Street", city: "Kolkata", zip: "700016" },
                 cuisine: ["Indian", "Curry"],
-                image: "https://images.unsplash.com/photo-1517244683847-7456b63c5969?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 rating: 4.9,
                 owner: owner._id,
                 menu: [
@@ -155,7 +155,7 @@ const seedData = async () => {
                 description: "Spicy tandoori delights",
                 address: { street: "Sector 17 Market", city: "Chandigarh", zip: "160017" },
                 cuisine: ["Indian", "Tandoori"],
-                image: "https://images.unsplash.com/photo-1585937421612-70a008356f36?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 rating: 4.4,
                 owner: owner._id,
                 menu: [
