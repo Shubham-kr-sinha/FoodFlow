@@ -1,8 +1,7 @@
 # FoodFlow - MERN Stack Food Ordering Application
 
-FoodFlow is a modern, full-stack food ordering platform built with the MERN stack (MongoDB, Express, React, Node.js). It features a seamless user experience for browsing restaurants, managing a shopping cart, and placing orders (Cash on Delivery).
+FoodFlow is a modern, full-stack food ordering platform built with the MERN stack (MongoDB, Express, React, Node.js). It features a seamless user experience for browsing restaurants, managing a shopping cart, and placing orders.
 
-![Home Page](file:///C:/Users/shubh/.gemini/antigravity/brain/f2c03fa0-7f24-4901-a7a0-99f8a2c4db99/result_1764957035909.png)
 
 ## 🚀 Technical Architecture
 
