@@ -6,7 +6,14 @@ const auth = require('../middleware/auth'); // We need to create this middleware
 // Get all restaurants
 router.get('/', async (req, res) => {
     try {
-        const restaurants = await Restaurant.find();
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 20;
+        const skip = (page - 1) * limit;
+
+        const restaurants = await Restaurant.find()
+            .skip(skip)
+            .limit(limit);
+
         res.json(restaurants);
     } catch (err) {
         res.status(500).send('Server Error');

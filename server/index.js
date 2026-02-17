@@ -20,6 +20,16 @@ const io = new Server(httpServer, {
 app.use(cors());
 app.use(express.json());
 
+// Request logging middleware
+app.use((req, res, next) => {
+    const start = Date.now();
+    res.on('finish', () => {
+        const duration = Date.now() - start;
+        console.log(`[${req.method}] ${req.originalUrl} - ${duration}ms`);
+    });
+    next();
+});
+
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/restaurants', require('./routes/restaurants'));

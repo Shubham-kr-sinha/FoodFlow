@@ -12,12 +12,15 @@ const Home = () => {
     useEffect(() => {
         const fetchRestaurants = async () => {
             try {
-                const res = await axios.get(`${config.API_URL}/api/restaurants`);
+                console.time('fetchRestaurants');
+                const res = await axios.get(`${config.API_URL}/api/restaurants`, { timeout: 10000 });
                 setRestaurants(res.data);
                 setLoading(false);
             } catch (err) {
                 console.error('Error fetching restaurants:', err);
                 setLoading(false);
+            } finally {
+                console.timeEnd('fetchRestaurants');
             }
         };
 
@@ -42,7 +45,7 @@ const Home = () => {
             {/* Hero Section */}
             <div className="relative bg-gray-900 rounded-3xl overflow-hidden mb-12 text-white">
                 <img
-                    src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80"
+                    src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
                     alt="Food Banner"
                     className="absolute inset-0 w-full h-full object-cover opacity-40"
                 />
