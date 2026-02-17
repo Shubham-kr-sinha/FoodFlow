@@ -27,10 +27,14 @@ FoodFlow is a modern, full-stack food ordering platform built with the MERN stac
 ## 📸 Screenshots
 
 ### Menu & Cart
-![Menu Page](file:///C:/Users/shubh/.gemini/antigravity/brain/f2c03fa0-7f24-4901-a7a0-99f8a2c4db99/menu_with_images_1764954829515.png)
+![Menu Page](<img width="1918" height="861" alt="image" src="https://github.com/user-attachments/assets/4fd424f0-a54a-42fe-8f37-09cc7c5f1e36" />
+<img width="1740" height="572" alt="image" src="https://github.com/user-attachments/assets/46fa41eb-8931-4231-a8a4-899825b5dfcc" />
+
+)
 
 ### Guest Checkout Flow
-![Signup Success](file:///C:/Users/shubh/.gemini/antigravity/brain/f2c03fa0-7f24-4901-a7a0-99f8a2c4db99/signup_success_1764961823850.png)
+![Signup Success](<img width="1552" height="495" alt="image" src="https://github.com/user-attachments/assets/53cc18da-8366-4008-9d27-a9a75415a2e8" />
+)
 
 ## 🛠️ Installation & Setup
 
